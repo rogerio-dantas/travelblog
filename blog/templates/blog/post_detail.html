@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'blog:list' %}">&larr;</a></p>
+<time>Published {{ post.published_at|naturalday }}</time>
+
+{{ post.content_html|safe }}
+{% endblock %}

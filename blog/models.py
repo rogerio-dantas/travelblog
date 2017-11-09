@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
@@ -22,3 +23,6 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.content_html = markdown.markdown(self.content)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', kwargs={'slug': self.slug})

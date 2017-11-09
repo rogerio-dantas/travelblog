@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+<ul>
+	{% for post in post_list %}
+	<li><a href="{{ post.get_absolute_url }}">{{ post }}</a></li>
+	{% endfor %}
+</ul>
+{% endblock %}
