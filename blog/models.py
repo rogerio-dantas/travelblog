@@ -1,5 +1,5 @@
+from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.utils import timezone
 
 import markdown
@@ -13,6 +13,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(default=timezone.now)
+    coords = models.PointField(blank=True, null=True)
 
     class Meta:
         ordering = ['-published_at', '-id']
@@ -26,3 +27,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'slug': self.slug})
+
+    @property
+    def latlong(self):
+        return (self.coords[1], self.coords[0])

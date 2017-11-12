@@ -1,9 +1,9 @@
-from django.contrib import admin
+from django.contrib.gis import admin
 
 from .models import Post
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(admin.GeoModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
