@@ -31,3 +31,13 @@ class Post(models.Model):
     @property
     def latlong(self):
         return (self.coords[1], self.coords[0])
+
+
+class Image(models.Model):
+
+    upload = models.ImageField(upload_to='posts/images')
+    description = models.TextField(blank=True, default='')
+    post = models.ForeignKey(Post, related_name='images')
+
+    def __str__(self):
+        return self.description

@@ -1,10 +1,15 @@
 from django.contrib.gis import admin
 
-from .models import Post
+from . import models
+
+
+class ImageInLine(admin.StackedInline):
+    model = models.Image
 
 
 class PostAdmin(admin.GeoModelAdmin):
+    inlines = [ImageInLine]
     prepopulated_fields = {'slug': ('title',)}
 
 
-admin.site.register(Post, PostAdmin)
+admin.site.register(models.Post, PostAdmin)
